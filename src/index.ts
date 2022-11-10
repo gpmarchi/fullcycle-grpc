@@ -1,3 +1,3 @@
-const value: number = 0;
-  
+const value = 0;
+
 console.log('gRPC test project');
