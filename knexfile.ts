@@ -10,7 +10,7 @@ const config: { [key: string]: Knex.Config } = {
     useNullAsDefault: true,
     migrations: {
       tableName: 'knex_migrations',
-      directory: 'src/shared/migrations',
+      directory: 'src/shared/infra/knex/migrations',
     },
   },
 
