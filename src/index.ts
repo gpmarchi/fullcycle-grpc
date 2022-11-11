@@ -1,3 +1,8 @@
-const value = 0;
+import { CategoriesRepository } from './courses/infra/knex/repositories/CategoriesRepository';
 
-console.log('gRPC test project');
+const categoriesRepository = new CategoriesRepository();
+
+categoriesRepository.create({
+  name: 'Programming',
+  description: 'Programming languages courses',
+});
