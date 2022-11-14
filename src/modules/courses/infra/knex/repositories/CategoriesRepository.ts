@@ -18,15 +18,13 @@ class CategoriesRepository implements ICategoriesRepository {
 
     const result = await knex<Category>('categories').where('id', id).first();
 
-    const customer = plainToInstance(Category, result);
+    const category = plainToInstance(Category, result);
 
-    return customer;
+    return category;
   }
 
   public async findById(id: string): Promise<Category | undefined> {
     const category = await knex<Category>('categories').where({ id }).first();
-
-    // const category = plainToInstance(Category, result);
 
     return category;
   }
