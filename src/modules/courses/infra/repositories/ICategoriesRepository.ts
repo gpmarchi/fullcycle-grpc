@@ -1,4 +1,5 @@
-import { ICreateCategoryDTO } from '../../dtos/ICreateCategoryDTO';
+import { ICreateCategoryDTO } from '@modules/courses/dtos/ICreateCategoryDTO';
+
 import { Category } from '../knex/entities/Category';
 
 interface ICategoriesRepository {

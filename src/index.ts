@@ -1,4 +1,4 @@
-import { CategoriesRepository } from './courses/infra/knex/repositories/CategoriesRepository';
+import { CategoriesRepository } from '@modules/courses/infra/knex/repositories/CategoriesRepository';
 
 const categoriesRepository = new CategoriesRepository();
 
