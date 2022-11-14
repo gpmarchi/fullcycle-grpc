@@ -31,8 +31,22 @@ class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
-  public async findByCourseId(courseId: string): Promise<Category> {
-    throw new Error('Method not implemented.');
+  public async findByCourseId(course_id: string): Promise<Category> {
+    const result = await knex<Category>('categories')
+      .select(
+        'categories.id',
+        'categories.name',
+        'categories.description',
+        'categories.created_at',
+        'categories.updated_at',
+      )
+      .leftJoin('courses', 'categories.id', 'courses.category_id')
+      .where('courses.id', course_id)
+      .first();
+
+    const category = plainToInstance(Category, result);
+
+    return category;
   }
 
   public async findAll(): Promise<Category[]> {
