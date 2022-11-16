@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts",
+    "dev:grpc": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/server/index.ts",
     "migrate:make": "knex migrate:make -x ts",
     "db:migrate": "knex migrate:latest",
     "db:rollback": "knex migrate:rollback",
