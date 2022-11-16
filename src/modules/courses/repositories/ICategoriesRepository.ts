@@ -7,6 +7,8 @@ interface ICategoriesRepository {
 
   findById(id: string): Promise<Category | undefined>;
 
+  findByName(name: string): Promise<Category | undefined>;
+
   findByCourseId(course_id: string): Promise<Category>;
 
   findAll(): Promise<Category[]>;

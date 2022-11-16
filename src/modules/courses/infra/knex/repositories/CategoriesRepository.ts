@@ -29,6 +29,12 @@ class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
+  public async findByName(name: string): Promise<Category | undefined> {
+    const category = await knex<Category>('categories').where({ name }).first();
+
+    return category;
+  }
+
   public async findByCourseId(course_id: string): Promise<Category> {
     const result = await knex<Category>('categories')
       .select(
