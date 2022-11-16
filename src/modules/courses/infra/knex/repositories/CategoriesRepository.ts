@@ -2,9 +2,9 @@ import { plainToInstance } from 'class-transformer';
 import { v4 as uuid } from 'uuid';
 
 import { ICreateCategoryDTO } from '@modules/courses/dtos/ICreateCategoryDTO';
+import { ICategoriesRepository } from '@modules/courses/repositories/ICategoriesRepository';
 import { knex } from '@shared/infra/knex';
 
-import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
 import { Category } from '../entities/Category';
 
 class CategoriesRepository implements ICategoriesRepository {

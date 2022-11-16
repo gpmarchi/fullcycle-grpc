@@ -2,9 +2,9 @@ import { plainToInstance } from 'class-transformer';
 import { v4 as uuid } from 'uuid';
 
 import { ICreateCourseDTO } from '@modules/courses/dtos/ICreateCourseDTO';
+import { ICoursesRepository } from '@modules/courses/repositories/ICoursesRepository';
 import { knex } from '@shared/infra/knex';
 
-import { ICoursesRepository } from '../../repositories/ICoursesRepository';
 import { Course } from '../entities/Course';
 
 class CoursesRepository implements ICoursesRepository {

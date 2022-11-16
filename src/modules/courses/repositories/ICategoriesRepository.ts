@@ -1,6 +1,6 @@
 import { ICreateCategoryDTO } from '@modules/courses/dtos/ICreateCategoryDTO';
 
-import { Category } from '../knex/entities/Category';
+import { Category } from '../infra/knex/entities/Category';
 
 interface ICategoriesRepository {
   create(categoryData: ICreateCategoryDTO): Promise<Category>;

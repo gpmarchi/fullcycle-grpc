@@ -1,6 +1,6 @@
 import { ICreateCourseDTO } from '@modules/courses/dtos/ICreateCourseDTO';
 
-import { Course } from '../knex/entities/Course';
+import { Course } from '../infra/knex/entities/Course';
 
 interface ICoursesRepository {
   create(coursesData: ICreateCourseDTO): Promise<Course>;
