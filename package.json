@@ -11,7 +11,7 @@
     "db:rollback": "knex migrate:rollback",
     "proto:list": "cd proto; buf ls-files; cd ..",
     "proto:lint": "cd proto; buf lint; cd ..",
-    "codegen:buf": "cd proto; buf generate; cd .."
+    "proto:codegen": "cd proto; buf generate; cd .."
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
