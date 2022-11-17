@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+import * as timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 import { CategoryServiceService } from 'proto/pb/v1/category_grpc_pb';
 import {
   CreateCategoryRequest,
@@ -31,14 +32,20 @@ const createCategory = async (
     });
 
     const response = new CreateCategoryResponse();
+
     const categoryResponse = new Category();
     categoryResponse.setId(category.id);
     categoryResponse.setName(category.name);
     categoryResponse.setDescription(category.description);
-    categoryResponse.setCreatedAt(category.created_at);
+
+    const createdAt = new timestamp_pb.Timestamp();
+    createdAt.fromDate(new Date(category.created_at));
+    categoryResponse.setCreatedAt(createdAt);
+
     response.setCategory(categoryResponse);
 
-    console.log(response);
+    // console.log(response);
+    // console.dir(response, { depth: null });
 
     callback(null, response);
   } catch (error) {
