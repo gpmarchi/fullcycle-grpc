@@ -7,6 +7,23 @@
 import * as jspb from "google-protobuf";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
+export class Blank extends jspb.Message { 
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Blank.AsObject;
+    static toObject(includeInstance: boolean, msg: Blank): Blank.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Blank, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Blank;
+    static deserializeBinaryFromReader(message: Blank, reader: jspb.BinaryReader): Blank;
+}
+
+export namespace Blank {
+    export type AsObject = {
+    }
+}
+
 export class Category extends jspb.Message { 
     getId(): string;
     setId(value: string): Category;
@@ -88,5 +105,27 @@ export class CreateCategoryResponse extends jspb.Message {
 export namespace CreateCategoryResponse {
     export type AsObject = {
         category?: Category.AsObject,
+    }
+}
+
+export class CategoryList extends jspb.Message { 
+    clearCategoriesList(): void;
+    getCategoriesList(): Array<Category>;
+    setCategoriesList(value: Array<Category>): CategoryList;
+    addCategories(value?: Category, index?: number): Category;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): CategoryList.AsObject;
+    static toObject(includeInstance: boolean, msg: CategoryList): CategoryList.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: CategoryList, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): CategoryList;
+    static deserializeBinaryFromReader(message: CategoryList, reader: jspb.BinaryReader): CategoryList;
+}
+
+export namespace CategoryList {
+    export type AsObject = {
+        categoriesList: Array<Category.AsObject>,
     }
 }
