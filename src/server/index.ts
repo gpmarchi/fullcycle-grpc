@@ -9,6 +9,7 @@ import {
   Category,
   Blank,
   CategoryList,
+  CategoryGetRequest,
 } from 'proto/pb/v1/category_pb';
 import { container } from 'tsyringe';
 
@@ -20,6 +21,7 @@ import {
 } from '@grpc/grpc-js';
 import { CreateCategoryService } from '@modules/courses/services/CreateCategoryService';
 import { ListCategoriesService } from '@modules/courses/services/ListCategoriesService';
+import { ShowCategoryService } from '@modules/courses/services/ShowCategoryService';
 
 const createCategory = async (
   call: ServerUnaryCall<CreateCategoryRequest, CreateCategoryResponse>,
@@ -92,9 +94,44 @@ const listCategories = async (
   }
 };
 
+const getCategory = async (
+  call: ServerUnaryCall<CategoryGetRequest, Category>,
+  callback: sendUnaryData<Category>,
+) => {
+  const showCategory = container.resolve(ShowCategoryService);
+
+  try {
+    const category_id = call.request.getId();
+
+    const category = await showCategory.execute(category_id);
+
+    const categoryResponse = new Category();
+    categoryResponse.setId(category.id);
+    categoryResponse.setName(category.name);
+    categoryResponse.setDescription(category.description);
+
+    const createdAt = new timestamp_pb.Timestamp();
+    createdAt.fromDate(new Date(category.created_at));
+    categoryResponse.setCreatedAt(createdAt);
+
+    const updatedAt = new timestamp_pb.Timestamp();
+    updatedAt.fromDate(new Date(category.updated_at));
+    categoryResponse.setUpdatedAt(updatedAt);
+
+    callback(null, categoryResponse);
+  } catch (error) {
+    console.log(error);
+    callback(error, null);
+  }
+};
+
 const server = new Server();
 
-server.addService(CategoryServiceService, { createCategory, listCategories });
+server.addService(CategoryServiceService, {
+  createCategory,
+  listCategories,
+  getCategory,
+});
 
 server.bindAsync('0.0.0.0:4000', ServerCredentials.createInsecure(), () => {
   server.start();

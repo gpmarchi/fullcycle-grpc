@@ -129,3 +129,23 @@ export namespace CategoryList {
         categoriesList: Array<Category.AsObject>,
     }
 }
+
+export class CategoryGetRequest extends jspb.Message { 
+    getId(): string;
+    setId(value: string): CategoryGetRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): CategoryGetRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: CategoryGetRequest): CategoryGetRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: CategoryGetRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): CategoryGetRequest;
+    static deserializeBinaryFromReader(message: CategoryGetRequest, reader: jspb.BinaryReader): CategoryGetRequest;
+}
+
+export namespace CategoryGetRequest {
+    export type AsObject = {
+        id: string,
+    }
+}

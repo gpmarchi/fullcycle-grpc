@@ -11,6 +11,7 @@ import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/t
 interface ICategoryServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     createCategory: ICategoryServiceService_ICreateCategory;
     listCategories: ICategoryServiceService_IListCategories;
+    getCategory: ICategoryServiceService_IGetCategory;
 }
 
 interface ICategoryServiceService_ICreateCategory extends grpc.MethodDefinition<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.CreateCategoryResponse> {
@@ -31,12 +32,22 @@ interface ICategoryServiceService_IListCategories extends grpc.MethodDefinition<
     responseSerialize: grpc.serialize<pb_v1_category_pb.CategoryList>;
     responseDeserialize: grpc.deserialize<pb_v1_category_pb.CategoryList>;
 }
+interface ICategoryServiceService_IGetCategory extends grpc.MethodDefinition<pb_v1_category_pb.CategoryGetRequest, pb_v1_category_pb.Category> {
+    path: "/pb.v1.CategoryService/GetCategory";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<pb_v1_category_pb.CategoryGetRequest>;
+    requestDeserialize: grpc.deserialize<pb_v1_category_pb.CategoryGetRequest>;
+    responseSerialize: grpc.serialize<pb_v1_category_pb.Category>;
+    responseDeserialize: grpc.deserialize<pb_v1_category_pb.Category>;
+}
 
 export const CategoryServiceService: ICategoryServiceService;
 
 export interface ICategoryServiceServer extends grpc.UntypedServiceImplementation {
     createCategory: grpc.handleUnaryCall<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.CreateCategoryResponse>;
     listCategories: grpc.handleUnaryCall<pb_v1_category_pb.Blank, pb_v1_category_pb.CategoryList>;
+    getCategory: grpc.handleUnaryCall<pb_v1_category_pb.CategoryGetRequest, pb_v1_category_pb.Category>;
 }
 
 export interface ICategoryServiceClient {
@@ -46,6 +57,9 @@ export interface ICategoryServiceClient {
     listCategories(request: pb_v1_category_pb.Blank, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
     listCategories(request: pb_v1_category_pb.Blank, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
     listCategories(request: pb_v1_category_pb.Blank, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
+    getCategory(request: pb_v1_category_pb.CategoryGetRequest, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.Category) => void): grpc.ClientUnaryCall;
+    getCategory(request: pb_v1_category_pb.CategoryGetRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.Category) => void): grpc.ClientUnaryCall;
+    getCategory(request: pb_v1_category_pb.CategoryGetRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.Category) => void): grpc.ClientUnaryCall;
 }
 
 export class CategoryServiceClient extends grpc.Client implements ICategoryServiceClient {
@@ -56,4 +70,7 @@ export class CategoryServiceClient extends grpc.Client implements ICategoryServi
     public listCategories(request: pb_v1_category_pb.Blank, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
     public listCategories(request: pb_v1_category_pb.Blank, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
     public listCategories(request: pb_v1_category_pb.Blank, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
+    public getCategory(request: pb_v1_category_pb.CategoryGetRequest, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.Category) => void): grpc.ClientUnaryCall;
+    public getCategory(request: pb_v1_category_pb.CategoryGetRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.Category) => void): grpc.ClientUnaryCall;
+    public getCategory(request: pb_v1_category_pb.CategoryGetRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.Category) => void): grpc.ClientUnaryCall;
 }
