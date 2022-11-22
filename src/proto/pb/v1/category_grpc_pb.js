@@ -84,6 +84,17 @@ var CategoryServiceService = exports.CategoryServiceService = {
     responseSerialize: serialize_pb_v1_CreateCategoryResponse,
     responseDeserialize: deserialize_pb_v1_CreateCategoryResponse,
   },
+  createCategoryStream: {
+    path: '/pb.v1.CategoryService/CreateCategoryStream',
+    requestStream: true,
+    responseStream: false,
+    requestType: pb_v1_category_pb.CreateCategoryRequest,
+    responseType: pb_v1_category_pb.CategoryList,
+    requestSerialize: serialize_pb_v1_CreateCategoryRequest,
+    requestDeserialize: deserialize_pb_v1_CreateCategoryRequest,
+    responseSerialize: serialize_pb_v1_CategoryList,
+    responseDeserialize: deserialize_pb_v1_CategoryList,
+  },
   listCategories: {
     path: '/pb.v1.CategoryService/ListCategories',
     requestStream: false,

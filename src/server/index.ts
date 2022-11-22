@@ -17,6 +17,7 @@ import {
   sendUnaryData,
   Server,
   ServerCredentials,
+  ServerReadableStream,
   ServerUnaryCall,
 } from '@grpc/grpc-js';
 import { CreateCategoryService } from '@modules/courses/services/CreateCategoryService';
@@ -57,6 +58,48 @@ const createCategory = async (
     console.log(error);
     callback(error, null);
   }
+};
+
+const createCategoryStream = async (
+  call: ServerReadableStream<CreateCategoryRequest, CategoryList>,
+  callback: sendUnaryData<CategoryList>,
+) => {
+  const createCategory = container.resolve(CreateCategoryService);
+
+  const categoriesResponse = new CategoryList();
+  const categories: Category[] = [];
+
+  call.on('data', async (createCategoryRequest: CreateCategoryRequest) => {
+    try {
+      const category = await createCategory.execute({
+        name: createCategoryRequest.getName(),
+        description: createCategoryRequest.getDescription(),
+      });
+
+      const categoryResponse = new Category();
+      categoryResponse.setId(category.id);
+      categoryResponse.setName(category.name);
+      categoryResponse.setDescription(category.description);
+
+      const createdAt = new timestamp_pb.Timestamp();
+      createdAt.fromDate(new Date(category.created_at));
+      categoryResponse.setCreatedAt(createdAt);
+
+      const updatedAt = new timestamp_pb.Timestamp();
+      updatedAt.fromDate(new Date(category.updated_at));
+      categoryResponse.setUpdatedAt(updatedAt);
+
+      categories.push(categoryResponse);
+
+      categoriesResponse.setCategoriesList(categories);
+    } catch (error) {
+      callback(error, null);
+    }
+  });
+
+  call.on('end', () => {
+    callback(null, categoriesResponse);
+  });
 };
 
 const listCategories = async (
@@ -129,6 +172,7 @@ const server = new Server();
 
 server.addService(CategoryServiceService, {
   createCategory,
+  createCategoryStream,
   listCategories,
   getCategory,
 });
