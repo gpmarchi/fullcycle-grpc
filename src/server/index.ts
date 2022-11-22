@@ -47,7 +47,7 @@ const createCategory = async (
     categoryResponse.setCreatedAt(createdAt);
 
     const updatedAt = new timestamp_pb.Timestamp();
-    updatedAt.fromDate(new Date(category.created_at));
+    updatedAt.fromDate(new Date(category.updated_at));
     categoryResponse.setUpdatedAt(updatedAt);
 
     response.setCategory(categoryResponse);
