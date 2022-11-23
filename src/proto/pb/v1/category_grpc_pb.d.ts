@@ -11,6 +11,7 @@ import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/t
 interface ICategoryServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     createCategory: ICategoryServiceService_ICreateCategory;
     createCategoryStream: ICategoryServiceService_ICreateCategoryStream;
+    createCategoryStreamBidirectional: ICategoryServiceService_ICreateCategoryStreamBidirectional;
     listCategories: ICategoryServiceService_IListCategories;
     getCategory: ICategoryServiceService_IGetCategory;
 }
@@ -32,6 +33,15 @@ interface ICategoryServiceService_ICreateCategoryStream extends grpc.MethodDefin
     requestDeserialize: grpc.deserialize<pb_v1_category_pb.CreateCategoryRequest>;
     responseSerialize: grpc.serialize<pb_v1_category_pb.CategoryList>;
     responseDeserialize: grpc.deserialize<pb_v1_category_pb.CategoryList>;
+}
+interface ICategoryServiceService_ICreateCategoryStreamBidirectional extends grpc.MethodDefinition<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.Category> {
+    path: "/pb.v1.CategoryService/CreateCategoryStreamBidirectional";
+    requestStream: true;
+    responseStream: true;
+    requestSerialize: grpc.serialize<pb_v1_category_pb.CreateCategoryRequest>;
+    requestDeserialize: grpc.deserialize<pb_v1_category_pb.CreateCategoryRequest>;
+    responseSerialize: grpc.serialize<pb_v1_category_pb.Category>;
+    responseDeserialize: grpc.deserialize<pb_v1_category_pb.Category>;
 }
 interface ICategoryServiceService_IListCategories extends grpc.MethodDefinition<pb_v1_category_pb.Blank, pb_v1_category_pb.CategoryList> {
     path: "/pb.v1.CategoryService/ListCategories";
@@ -57,6 +67,7 @@ export const CategoryServiceService: ICategoryServiceService;
 export interface ICategoryServiceServer extends grpc.UntypedServiceImplementation {
     createCategory: grpc.handleUnaryCall<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.CreateCategoryResponse>;
     createCategoryStream: grpc.handleClientStreamingCall<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.CategoryList>;
+    createCategoryStreamBidirectional: grpc.handleBidiStreamingCall<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.Category>;
     listCategories: grpc.handleUnaryCall<pb_v1_category_pb.Blank, pb_v1_category_pb.CategoryList>;
     getCategory: grpc.handleUnaryCall<pb_v1_category_pb.CategoryGetRequest, pb_v1_category_pb.Category>;
 }
@@ -69,6 +80,9 @@ export interface ICategoryServiceClient {
     createCategoryStream(metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientWritableStream<pb_v1_category_pb.CreateCategoryRequest>;
     createCategoryStream(options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientWritableStream<pb_v1_category_pb.CreateCategoryRequest>;
     createCategoryStream(metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientWritableStream<pb_v1_category_pb.CreateCategoryRequest>;
+    createCategoryStreamBidirectional(): grpc.ClientDuplexStream<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.Category>;
+    createCategoryStreamBidirectional(options: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.Category>;
+    createCategoryStreamBidirectional(metadata: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.Category>;
     listCategories(request: pb_v1_category_pb.Blank, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
     listCategories(request: pb_v1_category_pb.Blank, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
     listCategories(request: pb_v1_category_pb.Blank, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
@@ -86,6 +100,8 @@ export class CategoryServiceClient extends grpc.Client implements ICategoryServi
     public createCategoryStream(metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientWritableStream<pb_v1_category_pb.CreateCategoryRequest>;
     public createCategoryStream(options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientWritableStream<pb_v1_category_pb.CreateCategoryRequest>;
     public createCategoryStream(metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientWritableStream<pb_v1_category_pb.CreateCategoryRequest>;
+    public createCategoryStreamBidirectional(options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.Category>;
+    public createCategoryStreamBidirectional(metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<pb_v1_category_pb.CreateCategoryRequest, pb_v1_category_pb.Category>;
     public listCategories(request: pb_v1_category_pb.Blank, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
     public listCategories(request: pb_v1_category_pb.Blank, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
     public listCategories(request: pb_v1_category_pb.Blank, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: pb_v1_category_pb.CategoryList) => void): grpc.ClientUnaryCall;
